@@ -29,7 +29,3 @@ Aplicación web interactiva y minimalista enfocada en practicar y aprender la tr
 - **HTML5 & TypeScript**
 - **Vite**
 - **Tailwind CSS**
-
-## 🚀 Probalo en
-
-**https://rxdrx.github.io/rsdev-cirilic-to-latin/**
