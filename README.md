@@ -2,6 +2,10 @@
 
 Aplicación web interactiva y minimalista enfocada en practicar y aprender la transliteración de los nombres de las 100 ciudades más grandes de Rusia, desde el alfabeto cirílico al alfabeto latino (en estándar de mapas internacionales).
 
+## 🚀 Probalo en vivo
+
+👉 **[https://rxdrx.github.io/rsdev-cirilic-to-latin/](https://rxdrx.github.io/rsdev-cirilic-to-latin/)**
+
 ## 🎮 Modos de Juego
 
 1. **Modo Práctica:**
@@ -26,15 +30,6 @@ Aplicación web interactiva y minimalista enfocada en practicar y aprender la tr
 - **Vite**
 - **Tailwind CSS**
 
-## 🚀 Desarrollo Local
+## 🚀 Probalo en
 
-```bash
-# Instalar dependencias
-npm install
-
-# Iniciar servidor de desarrollo
-npm run dev
-
-# Compilar para producción
-npm run build
-```
+**https://rxdrx.github.io/rsdev-cirilic-to-latin/**
