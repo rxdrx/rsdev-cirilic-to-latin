@@ -440,7 +440,7 @@ function renderPlayingScreen(): string {
         </header>
 
         <!-- Feedback Banner Area (Fixed Height Slot to Prevent Layout Shift) -->
-        <div class="h-12 flex items-center justify-center">
+        <div id="feedback-banner" class="h-12 flex items-center justify-center">
           ${state.feedback.message ? `
             <div class="w-full p-3 border rounded-lg text-sm font-medium text-center ${feedbackClass}">
               ${state.feedback.message}
@@ -524,6 +524,15 @@ function attachPlayingEvents() {
 
   // Focus input automatically
   input?.focus();
+
+  // Clear previous feedback message when user starts typing new answer
+  input?.addEventListener('input', () => {
+    if (state.feedback.message) {
+      state.feedback = { type: null, message: '' };
+      const banner = document.getElementById('feedback-banner');
+      if (banner) banner.innerHTML = '';
+    }
+  });
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
