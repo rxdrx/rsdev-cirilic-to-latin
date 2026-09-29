@@ -468,7 +468,7 @@ function renderPlayingScreen(): string {
               id="latin-input"
               type="text"
               class="input-field"
-              placeholder="ej: ${current.latin.split(' ')[0]}"
+              placeholder="ej: Moscow"
               autofocus
               required
             />
@@ -483,9 +483,6 @@ function renderPlayingScreen(): string {
             </button>
             <button type="button" id="btn-restart" class="btn-secondary text-neutral-500 hover:text-neutral-900">
               Reiniciar
-            </button>
-            <button type="button" id="btn-home-action" class="btn-secondary text-neutral-500 hover:text-neutral-900">
-              Inicio
             </button>
           </div>
         </form>
@@ -523,7 +520,6 @@ function attachPlayingEvents() {
   const skipBtn = document.getElementById('btn-skip');
   const restartBtn = document.getElementById('btn-restart');
   const homeHeaderBtn = document.getElementById('btn-home-header');
-  const homeActionBtn = document.getElementById('btn-home-action');
   const refBtn = document.getElementById('btn-toggle-ref-playing');
 
   // Focus input automatically
@@ -546,7 +542,6 @@ function attachPlayingEvents() {
   });
 
   homeHeaderBtn?.addEventListener('click', goToMenu);
-  homeActionBtn?.addEventListener('click', goToMenu);
 
   refBtn?.addEventListener('click', () => {
     state.showReferenceTable = !state.showReferenceTable;
