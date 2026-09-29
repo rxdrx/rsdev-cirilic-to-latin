@@ -299,7 +299,7 @@ function renderMenuScreen(): string {
     <main class="w-full max-w-2xl sm:max-w-3xl mx-auto game-card p-8 sm:p-12 space-y-8">
       <header class="text-center space-y-3 border-b border-neutral-200 pb-8">
         <span class="text-xs sm:text-sm font-semibold uppercase tracking-widest text-neutral-500">Aprende Ruso</span>
-        <h1 class="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">Transliteración de Ciudades</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">Minijuego Ruso-Latin</h1>
         <p class="text-base text-neutral-600 max-w-lg mx-auto">
           Practica la transliteración del alfabeto cirílico al latino (estándar internacional de mapas) con las 100 ciudades más grandes de Rusia.
         </p>
@@ -309,7 +309,7 @@ function renderMenuScreen(): string {
         <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-500 mb-3">Selecciona un Modo de Juego</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <button id="btn-mode-practice" class="p-6 text-left border border-neutral-300 rounded-xl hover:border-neutral-900 transition-all focus:outline-none focus:ring-2 focus:ring-neutral-900">
+          <button id="btn-mode-practice" class="p-6 text-left border border-neutral-300 rounded-xl hover:border-neutral-900 hover:bg-neutral-50 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-neutral-900">
             <div class="flex items-center justify-between mb-3">
               <span class="font-semibold text-neutral-900 text-xl">Práctica</span>
               <span class="text-xs bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-md font-mono">Infinito</span>
@@ -319,7 +319,7 @@ function renderMenuScreen(): string {
             </p>
           </button>
 
-          <button id="btn-mode-challenge" class="p-6 text-left border border-neutral-300 rounded-xl hover:border-neutral-900 transition-all focus:outline-none focus:ring-2 focus:ring-neutral-900">
+          <button id="btn-mode-challenge" class="p-6 text-left border border-neutral-300 rounded-xl hover:border-neutral-900 hover:bg-neutral-50 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-neutral-900">
             <div class="flex items-center justify-between mb-3">
               <span class="font-semibold text-neutral-900 text-xl">Desafío</span>
               <span class="text-xs bg-neutral-900 text-white px-2.5 py-1 rounded-md font-mono">5 Vidas</span>
@@ -422,11 +422,15 @@ function renderPlayingScreen(): string {
       <div class="space-y-6">
         <!-- Header bar with Progress, Timer and Lives -->
         <header class="flex items-center justify-between pb-5 border-b border-neutral-200 text-xs sm:text-sm text-neutral-600">
-          <div>
+          <div class="flex items-center gap-3">
+            <button type="button" id="btn-home-header" class="px-2.5 py-1 text-xs font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 rounded-md transition-all flex items-center gap-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-neutral-900" title="Volver al menú principal">
+              <span>←</span>
+              <span>Menú</span>
+            </button>
             <span class="font-medium text-neutral-900 text-sm sm:text-base">${progressText}</span>
           </div>
           
-          <div class="flex items-center gap-5">
+          <div class="flex items-center gap-4 sm:gap-5">
             <div class="font-mono text-base font-semibold text-neutral-800 flex items-center gap-1.5">
               <span class="text-neutral-400">⏱</span>
               <span id="timer-display">${formatTime(state.elapsedSeconds)}</span>
@@ -470,7 +474,7 @@ function renderPlayingScreen(): string {
             />
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-4 pt-1">
+          <div class="flex flex-col sm:flex-row gap-3 pt-1">
             <button type="submit" class="btn-primary flex-1">
               Comprobar
             </button>
@@ -479,6 +483,9 @@ function renderPlayingScreen(): string {
             </button>
             <button type="button" id="btn-restart" class="btn-secondary text-neutral-500 hover:text-neutral-900">
               Reiniciar
+            </button>
+            <button type="button" id="btn-home-action" class="btn-secondary text-neutral-500 hover:text-neutral-900">
+              Inicio
             </button>
           </div>
         </form>
@@ -496,6 +503,18 @@ function renderPlayingScreen(): string {
 }
 
 /**
+ * Stops current game and returns to home/menu screen
+ */
+function goToMenu() {
+  if (state.timerInterval) {
+    clearInterval(state.timerInterval);
+    state.timerInterval = null;
+  }
+  state.screen = 'menu';
+  render();
+}
+
+/**
  * Attach events for main game screen
  */
 function attachPlayingEvents() {
@@ -503,6 +522,8 @@ function attachPlayingEvents() {
   const input = document.getElementById('latin-input') as HTMLInputElement | null;
   const skipBtn = document.getElementById('btn-skip');
   const restartBtn = document.getElementById('btn-restart');
+  const homeHeaderBtn = document.getElementById('btn-home-header');
+  const homeActionBtn = document.getElementById('btn-home-action');
   const refBtn = document.getElementById('btn-toggle-ref-playing');
 
   // Focus input automatically
@@ -523,6 +544,9 @@ function attachPlayingEvents() {
     const currentId = state.currentCity?.id ?? null;
     startGame(state.mode, currentId);
   });
+
+  homeHeaderBtn?.addEventListener('click', goToMenu);
+  homeActionBtn?.addEventListener('click', goToMenu);
 
   refBtn?.addEventListener('click', () => {
     state.showReferenceTable = !state.showReferenceTable;

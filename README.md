@@ -1,4 +1,4 @@
-# Minijuego de Transliteración Rusa (Cirílico a Latino)
+# Minijuego Ruso-Latin
 
 Aplicación web interactiva y minimalista enfocada en practicar y aprender la transliteración de los nombres de las 100 ciudades más grandes de Rusia, desde el alfabeto cirílico al alfabeto latino (en estándar de mapas internacionales).
 
